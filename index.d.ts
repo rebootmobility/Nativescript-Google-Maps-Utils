@@ -1,6 +1,6 @@
 import { Color } from "tns-core-modules/color";
 
-declare module "nativescript-danem-google-maps-utils" {
+declare module "@rebootmobility/nativescript-google-maps-utils" {
 
   import { MapView, Position, Marker } from "nativescript-google-maps-sdk";
 
@@ -19,11 +19,11 @@ declare module "nativescript-danem-google-maps-utils" {
   }
 
   export function setupHeatmap(mapView: MapView, positions: Array<Position>, colors: Array<Color>, startPoints: Array<number>): IHeatmapConfig;
-  
+
   export function removeHeatmap(): void;
 
-  export function setRadius() : void;
+  export function setRadius(): void;
 
-  export function setOpacity() : void;
+  export function setOpacity(): void;
 
 }
