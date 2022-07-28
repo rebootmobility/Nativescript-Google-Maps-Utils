@@ -85,10 +85,11 @@ var GMUClusterRendererDelegateImpl = (function (_super) {
     GMUClusterRendererDelegateImpl.prototype.rendererWillRenderMarker = function (renderer, marker) {
         var owner = this._owner.get();
         if (marker.userData instanceof POIItem) {
-            var mIcon = Image;
-            mIcon.imageSource = imageSourceModule.fromResource(marker.userData.imageUrl);
-            marker.icon = mIcon.imageSource.ios;
-            //marker.title = "test"
+            if (marker.userData && marker.userData.imageUrl) {
+                var mIcon = Image;
+                mIcon.imageSource = imageSourceModule.fromResource(marker.userData.imageUrl);
+                marker.icon = mIcon.imageSource.ios;
+            }
         } else {
             // cluster marker
         }
@@ -113,7 +114,7 @@ exports.clearMap = clearMap;
 
 function setupMarkerCluster(mapView, markers) {
     _mapView = mapView;
-    console.log("*** init ios map view: ");
+    // console.log("*** init ios map view: ");
     var iconGenerator = GMUDefaultClusterIconGenerator.alloc().init();
     var algorithm = GMUNonHierarchicalDistanceBasedAlgorithm.alloc().init();
     var renderer = GMUDefaultClusterRenderer.alloc().initWithMapViewClusterIconGenerator(mapView.nativeView, iconGenerator)
@@ -123,13 +124,13 @@ function setupMarkerCluster(mapView, markers) {
     clusterManager.setDelegateMapDelegate(clusterManagerDelegate, mapView);
     var rendererDelegate = GMUClusterRendererDelegateImpl.initWithMapViewClusterIconGenerator(mapView.nativeView, iconGenerator, new WeakRef(this))
     renderer.delegate = rendererDelegate;
-    console.log(_mapView)
-    console.log("clusterManagerDelegate", clusterManagerDelegate)
-    console.log("rendererDelegate", rendererDelegate)
-    console.log("GMUDefaultClusterIconGenerator", iconGenerator instanceof GMUDefaultClusterIconGenerator, iconGenerator); // true
-    console.log("GMUNonHierarchicalDistanceBasedAlgorithm ", algorithm instanceof GMUNonHierarchicalDistanceBasedAlgorithm, algorithm); // true
-    console.log("GMUDefaultClusterRenderer : ", renderer instanceof GMUDefaultClusterRenderer, renderer); // true
-    console.log("GMUClusterManager : ", clusterManager instanceof GMUClusterManager, clusterManager); // true
+    // console.log(_mapView)
+    // console.log("clusterManagerDelegate", clusterManagerDelegate)
+    // console.log("rendererDelegate", rendererDelegate)
+    // console.log("GMUDefaultClusterIconGenerator", iconGenerator instanceof GMUDefaultClusterIconGenerator, iconGenerator); // true
+    // console.log("GMUNonHierarchicalDistanceBasedAlgorithm ", algorithm instanceof GMUNonHierarchicalDistanceBasedAlgorithm, algorithm); // true
+    // console.log("GMUDefaultClusterRenderer : ", renderer instanceof GMUDefaultClusterRenderer, renderer); // true
+    // console.log("GMUClusterManager : ", clusterManager instanceof GMUClusterManager, clusterManager); // true
 
     for (var i = 0; i < markers.length; i++) {
         var clusterItem = POIItem.alloc().initWithPositionNameImageUrlTitle(markers[i].position.ios, markers[i].userData, markers[i].infoWindowTemplate, markers[i].title)
@@ -147,7 +148,7 @@ exports.setupMarkerCluster = setupMarkerCluster;
 function setupHeatmap(mapView, positions, colors, startPoints) {
     var listHeatMap = [];
     heatmaps = GMUHeatmapTileLayer.alloc();
-    console.log("GMUHeatmapTileLayer : ", heatmaps instanceof GMUHeatmapTileLayer, heatmaps); // true
+    // console.log("GMUHeatmapTileLayer : ", heatmaps instanceof GMUHeatmapTileLayer, heatmaps); // true
     heatmaps.radius = 80
     heatmaps.opacity = 0.8
     heatmaps.gradient = GMUGradient.alloc().initWithColorsStartPointsColorMapSize(

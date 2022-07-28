@@ -49,16 +49,18 @@ const CustomClusterItem = java.lang.Object.extend({
 });
 
 function setupMarkerCluster(mapView, markers) {
-    console.log(mapView, markers.length)
+    // console.log(mapView, markers.length)
     _mapView = mapView
     const CustomClusterRenderer = DefaultClusterRenderer.extend({
         init: function () { },
         onBeforeClusterItemRendered: function (item, markerOptions) {
             this.super.onBeforeClusterItemRendered(item, markerOptions);
-            var mIcon = Image;
-            mIcon.imageSource = item.marker.icon.imageSource;
-            var androidIcon = com.google.android.gms.maps.model.BitmapDescriptorFactory.fromBitmap(mIcon.imageSource.android);
-            markerOptions.icon(androidIcon);
+            if (item.marker.icon) {
+                var mIcon = Image;
+                mIcon.imageSource = item.marker.icon.imageSource;
+                var androidIcon = com.google.android.gms.maps.model.BitmapDescriptorFactory.fromBitmap(mIcon.imageSource.android);
+                markerOptions.icon(androidIcon);
+            }
         }
     });
     var clusterManager = new ClusterManager(utils.ad.getApplicationContext(), _mapView.gMap);
