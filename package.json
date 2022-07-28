@@ -31,6 +31,11 @@
     "demo-android": "grunt build && cd demo && tns run android",
     "demo-ng-ios": "grunt build && cd demo-ng && tns run ios",
     "demo-ng-android": "grunt build && cd demo-ng && tns run android",
+    "release:pre": "npm run clean && npm run build && npm run build",
+    "release:post": "git add package.json && git commit -m 'chore(release): New release version' && npm run git-tag && npm run version-and-push",
+    "release:major": "npm run release:pre && npm version major && npm run release:post",
+    "release:minor": "npm run release:pre && npm version minor && npm run release:post",
+    "release:patch": "npm run release:pre && npm version patch && npm run release:post",
     "merge-and-publish:pre": "git checkout master && git merge develop && mkdir package",
     "merge-and-publish": "cd package && mv ../README.md . && mv ../LICENSE . && npm publish && git reset --hard && git clean -f"
   },
