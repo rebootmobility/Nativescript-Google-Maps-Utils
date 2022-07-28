@@ -18,7 +18,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/j20mc/Nativescript-Danem-Google-Maps-Utils"
+    "url": "https://github.com/rebootmobility/Nativescript-Google-Maps-Utils"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "scripts": {
     "tslint": "tslint --project tsconfig.json",
