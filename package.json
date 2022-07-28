@@ -30,7 +30,9 @@
     "demo-ios": "grunt build && cd demo && tns run ios",
     "demo-android": "grunt build && cd demo && tns run android",
     "demo-ng-ios": "grunt build && cd demo-ng && tns run ios",
-    "demo-ng-android": "grunt build && cd demo-ng && tns run android"
+    "demo-ng-android": "grunt build && cd demo-ng && tns run android",
+    "merge-and-publish:pre": "git checkout master && git merge develop && mkdir package",
+    "merge-and-publish": "cd package && mv ../README.md . && mv ../LICENSE . && npm publish && git reset --hard && git clean -f"
   },
   "keywords": [
     "NativeScript",
